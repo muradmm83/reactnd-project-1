@@ -30,7 +30,7 @@ class BooksApp extends React.Component {
           currentState.books = books.map(b => ({
             id: b.id,
             title: b.title,
-            author: b.authors.join(', '),
+            authors: b.authors,
             imageUrl: b.imageLinks.thumbnail,
             shelf: b.shelf
           }));
