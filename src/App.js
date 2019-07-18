@@ -5,7 +5,11 @@ import BookShelf from './BookShelf';
 
 class BooksApp extends React.Component {
   state = {
-    shelves: ['Currently Reading', 'Want to Read', 'Read'],
+    shelves: [
+      { title: 'Currently Reading', name: 'currentlyReading' },
+      { title: 'Want to Read', name: 'wantToRead' },
+      { title: 'Read', name: 'read' }
+    ],
     /**
      * TODO: Instead of using this state variable to keep track of which page
      * we're on, use the URL in the browser's address bar. This will ensure that
@@ -21,9 +25,11 @@ class BooksApp extends React.Component {
       .then(books => {
         this.setState(currentState => {
           currentState.books = books.map(b => ({
+            id: b.id,
             title: b.title,
             author: b.authors.join(', '),
-            imageUrl: b.imageLinks.thumbnail
+            imageUrl: b.imageLinks.thumbnail,
+            shelf: b.shelf
           }));
 
           return currentState;
@@ -62,7 +68,7 @@ class BooksApp extends React.Component {
               </div>
               <div className="list-books-content">
                 <div>
-                  {this.state.shelves.map(shelf => (<BookShelf shelfTitle={shelf} books={this.state.books} />))}
+                  {this.state.shelves.map(shelf => (<BookShelf shelfTitle={shelf.title} books={this.state.books.filter(b => b.shelf === shelf.name)} />))}
                 </div>
               </div>
               <div className="open-search">
