@@ -21,7 +21,7 @@ class Search extends Component {
             typingTimeout: setTimeout(() => {
                 BooksAPI.search(term)
                     .then(books => {
-                        if (!books.error) {
+                        if (books && !books.error) {
                             let foundBooks = books.map(b => ({
                                 id: b.id,
                                 title: b.title,
@@ -64,7 +64,7 @@ class Search extends Component {
                 </div>
                 <div className="search-books-results">
                     <ol className="books-grid">
-                        {this.state.searchResult.map(b => (<Book key={b.id} book={b} />))}
+                        {this.state.searchResult.map(b => (<Book key={b.id} book={b} onUpdateShelf={(book, shelf) => this.props.onUpdateShelf(book, shelf)} />))}
                     </ol>
                 </div>
             </div>
@@ -73,7 +73,8 @@ class Search extends Component {
 }
 
 Search.propTypes = {
-    books: PropTypes.array.isRequired
+    books: PropTypes.array.isRequired,
+    onUpdateShelf: PropTypes.func.isRequired
 }
 
 export default Search;
