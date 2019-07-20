@@ -45,6 +45,12 @@ class Search extends Component {
                                 searchResult: foundBooks
                             }));
                         }
+                        else {
+                            this.setState(currentState =>({
+                                ...currentState,
+                                searchResult: []
+                            }));
+                        }
                     });
             }, 550)
         }));
