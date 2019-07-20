@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import * as BooksAPI from './BooksAPI';
 import Book from './Book';
+import noThumb from './icons/no-thumb.png';
 
 class Search extends Component {
 
@@ -26,7 +27,7 @@ class Search extends Component {
                                 id: b.id,
                                 title: b.title,
                                 authors: b.authors,
-                                imageUrl: b.imageLinks.thumbnail,
+                                imageUrl: b.imageLinks ? b.imageLinks.thumbnail : noThumb,
                                 shelf: 'none'
                             }));
 

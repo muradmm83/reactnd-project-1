@@ -2,6 +2,7 @@ import React from 'react'
 import { BrowserRouter, Route } from 'react-router-dom';
 import * as BooksAPI from './BooksAPI'
 import './App.css'
+import noThumb from './icons/no-thumb.png';
 
 import BookList from './BookList';
 import Search from './Search';
@@ -29,7 +30,7 @@ class BooksApp extends React.Component {
             id: b.id,
             title: b.title,
             authors: b.authors,
-            imageUrl: b.imageLinks.thumbnail,
+            imageUrl: b.imageLinks ? b.imageLinks.thumbnail : noThumb,
             shelf: b.shelf
           }));
 
